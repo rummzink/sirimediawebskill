@@ -326,7 +326,7 @@ bot.dialog('HelpDialog', function (session) {
 
 bot.dialog('Search', function (session,args) {
     var resultObj = {
-        interest : builder.EntityRecognizer.findAllEntities(args.intent.entities),
+        interest : args.intent.entities,
         products :[
             {
                 "name": "SSGN8"
