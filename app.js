@@ -326,7 +326,7 @@ bot.dialog('HelpDialog', function (session) {
 
 bot.dialog('Search', function (session,args) {
     var entities = [];
-    $.each(args.intent.entities,function(){
+    args.intent.entities.forEach(function(){
         entities.push(this.type);
     });
     var resultObj = {
