@@ -324,7 +324,7 @@ bot.dialog('HelpDialog', function (session) {
     matches: 'HelpDialog'
 });
 
-bot.dialog('testJSON', function (session) {
+bot.dialog('Search', function (session) {
     var resultObj = {
         intent : "buy",
         products :[
@@ -338,7 +338,7 @@ bot.dialog('testJSON', function (session) {
     };
     session.endDialog(JSON.stringify(resultObj));
 }).triggerAction({
-    matches: 'testJSON'
+    matches: 'Search'
 });
     
 
