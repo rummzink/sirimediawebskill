@@ -324,9 +324,9 @@ bot.dialog('HelpDialog', function (session) {
     matches: 'HelpDialog'
 });
 
-bot.dialog('Search', function (session) {
+bot.dialog('Search', function (session,args) {
     var resultObj = {
-        intent : "buy",
+        interest : args.intent.entities,
         products :[
             {
                 "name": "SSGN8"
@@ -336,6 +336,25 @@ bot.dialog('Search', function (session) {
             }
         ]
     };
+    // var sidesEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Sides');
+    // if (sidesEntity){
+    //     game.sides = sidesEntity.entity;
+    // }
+    // var countEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Count');
+    // if (countEntity){
+    //     game.count = countEntity.entity;
+    // }
+
+    // if (sidesEntity) {
+    //     // city entity detected, continue to next step
+    //     next({ response: sidesEntity.entity });
+    // } else {
+    //     // no entities detected, ask user for a destination
+    //     builder.Prompts.text(session, 'Please enter the number of sides of the dice to be rolled.', { 
+    //         speak: speak(session, 'choose_number_of_sides') 
+    //     });
+    // }
+
     session.endDialog(JSON.stringify(resultObj));
 }).triggerAction({
     matches: 'Search'
