@@ -326,8 +326,8 @@ bot.dialog('HelpDialog', function (session) {
 
 bot.dialog('Search', function (session,args) {
     var entities = [];
-    args.intent.entities.forEach(function(){
-        entities.push(this.type);
+    args.intent.entities.forEach(function(element){
+        entities.push(element.type);
     });
     var resultObj = {
         interest : entities,
