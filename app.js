@@ -6,6 +6,7 @@ var restify = require('restify');
 var Store = require('./store');
 var spellService = require('./spell-service');
 var ssml = require('./ssml');
+const googleTrends = require('google-trends-api');
 
 // Setup Restify Server
 var server = restify.createServer();
