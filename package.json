@@ -25,6 +25,7 @@
     "dotenv-extended": "^2.0.0",
     "restify": "^4.3.0",
     "request": "^2.79.0",
-    "bluebird": "^3.4.7"
+    "bluebird": "^3.4.7",
+    "google-trends-api": "^4.3.0"
   }
 }
