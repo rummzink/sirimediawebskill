@@ -347,9 +347,11 @@ bot.dialog('Search', function (session,args) {
     .then(function(results){
       console.log('These results are awesome', results);
       resultObj.googleTrends = results;
+      session.endDialog(JSON.stringify(resultObj));
     })
     .catch(function(err){
       console.error('Oh no there was an error', err);
+      session.endDialog(JSON.stringify(resultObj));
     });
 
     // var sidesEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Sides');
@@ -371,7 +373,7 @@ bot.dialog('Search', function (session,args) {
     //     });
     // }
 
-    session.endDialog(JSON.stringify(resultObj));
+    // session.endDialog(JSON.stringify(resultObj));
 }).triggerAction({
     matches: 'Search'
 });
