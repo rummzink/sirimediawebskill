@@ -346,6 +346,7 @@ bot.dialog('Search', function (session,args) {
     googleTrends.interestOverTime({keyword: 'Women\'s march'})
     .then(function(results){
       console.log('These results are awesome', results);
+      resultObj.googleTrends = results;
     })
     .catch(function(err){
       console.error('Oh no there was an error', err);
