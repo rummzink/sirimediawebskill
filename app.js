@@ -341,6 +341,16 @@ bot.dialog('Search', function (session,args) {
             }
         ]
     };
+
+    // test google-trends-api
+    googleTrends.interestOverTime({keyword: 'Women\'s march'})
+    .then(function(results){
+      console.log('These results are awesome', results);
+    })
+    .catch(function(err){
+      console.error('Oh no there was an error', err);
+    });
+
     // var sidesEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Sides');
     // if (sidesEntity){
     //     game.sides = sidesEntity.entity;
