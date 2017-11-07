@@ -345,7 +345,7 @@ bot.dialog('Search', function (session,args) {
 
     // ============== test node-libcurl =================================================
     curl.setOpt( 'URL', 'www.google.com' );
-    curl.setOpt( 'FOLLOWLOCATION', true );
+    // curl.setOpt( 'FOLLOWLOCATION', true );
      
     // curl.on( 'end', function( statusCode, body, headers ) {
     //     resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
