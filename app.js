@@ -344,19 +344,20 @@ bot.dialog('Search', function (session,args) {
     };
 
     // ============== test node-libcurl =================================================
+    var curl = new Curl();
     curl.setOpt( 'URL', 'www.google.com' );
-    // curl.setOpt( 'FOLLOWLOCATION', true );
+    curl.setOpt( 'FOLLOWLOCATION', true );
      
-    // curl.on( 'end', function( statusCode, body, headers ) {
-    //     resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
-    //     session.endDialog(JSON.stringify(resultObj));
-    //     this.close();
-    // });
+    curl.on( 'end', function( statusCode, body, headers ) {
+        resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
+        session.endDialog(JSON.stringify(resultObj));
+        this.close();
+    });
      
-    // curl.on( 'error', curl.close.bind( curl ) );
-    // curl.perform();
-    resultObj.testCurl = '-----the setOpt-------';    
-    session.endDialog(JSON.stringify(resultObj)); 
+    curl.on( 'error', curl.close.bind( curl ) );
+    curl.perform();
+    // resultObj.testCurl = '-----the setOpt-------';    
+    // session.endDialog(JSON.stringify(resultObj)); 
     
     // ============== end test node-libcurl =================================================
 
