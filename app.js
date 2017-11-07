@@ -344,7 +344,7 @@ bot.dialog('Search', function (session,args) {
     };
 
     // ============== test node-libcurl =================================================
-    curl.setOpt( 'URL', 'www.google.com' );
+    // curl.setOpt( 'URL', 'www.google.com' );
     // curl.setOpt( 'FOLLOWLOCATION', true );
      
     // curl.on( 'end', function( statusCode, body, headers ) {
