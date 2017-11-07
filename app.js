@@ -344,8 +344,8 @@ bot.dialog('Search', function (session,args) {
     };
 
     // ============== test node-libcurl =================================================
-    // curl.setOpt( 'URL', 'www.google.com' );
-    // curl.setOpt( 'FOLLOWLOCATION', true );
+    curl.setOpt( 'URL', 'www.google.com' );
+    curl.setOpt( 'FOLLOWLOCATION', true );
      
     // curl.on( 'end', function( statusCode, body, headers ) {
     //     resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
@@ -355,7 +355,7 @@ bot.dialog('Search', function (session,args) {
      
     // curl.on( 'error', curl.close.bind( curl ) );
     // curl.perform();
-    resultObj.testCurl = '-------------------';    
+    resultObj.testCurl = '-----909090-------';    
     session.endDialog(JSON.stringify(resultObj)); 
     
     // ============== end test node-libcurl =================================================
