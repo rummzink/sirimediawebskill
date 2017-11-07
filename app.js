@@ -348,13 +348,14 @@ bot.dialog('Search', function (session,args) {
     curl.setOpt( 'FOLLOWLOCATION', true );
      
     curl.on( 'end', function( statusCode, body, headers ) {
-        //resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
+        resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
+        session.endDialog(JSON.stringify(resultObj));
         this.close();
     });
      
     curl.on( 'error', curl.close.bind( curl ) );
     curl.perform();
-    resultObj.testCurl = '-------------------';     
+    // resultObj.testCurl = '-------------------';     
     
     // ============== end test node-libcurl =================================================
 
