@@ -358,7 +358,13 @@ bot.dialog('Search', function (session,args) {
         this.close();
     });
      
-    curl.on( 'error', curl.close.bind( curl ) );
+    curl.on( 'error', function(err, curlErrCode){
+        console.error( 'Err: ', err );
+        console.error( 'Code: ', curlErrCode );
+        resultObj.testCurl = err + '---' + curlErrCode;     
+        session.endDialog(JSON.stringify(resultObj));
+        this.close();
+    } );
     curl.perform();
     // resultObj.testCurl = '-----the setOpt-------';    
     // session.endDialog(JSON.stringify(resultObj)); 
