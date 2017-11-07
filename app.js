@@ -343,28 +343,29 @@ bot.dialog('Search', function (session,args) {
         ]
     };
 
-    curl.setOpt( 'URL', 'www.google.com' );
-    curl.setOpt( 'FOLLOWLOCATION', true );
+    // test node-libcurl =================================================
+    // curl.setOpt( 'URL', 'www.google.com' );
+    // curl.setOpt( 'FOLLOWLOCATION', true );
      
-    curl.on( 'end', function( statusCode, body, headers ) {
-        resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
-        this.close();
-    });
-     
-    curl.on( 'error', curl.close.bind( curl ) );
-    curl.perform();
-
-    // test google-trends-api
-    // googleTrends.interestOverTime({keyword: 'Women\'s march'})
-    // .then(function(results){
-    //   console.log('These results are awesome', results);
-    //   resultObj.googleTrends = results;
-    //   session.endDialog(JSON.stringify(resultObj));
-    // })
-    // .catch(function(err){
-    //   console.error('Oh no there was an error', err);
-    //   session.endDialog(JSON.stringify(resultObj));
+    // curl.on( 'end', function( statusCode, body, headers ) {
+    //     resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
+    //     this.close();
     // });
+     
+    // curl.on( 'error', curl.close.bind( curl ) );
+    // curl.perform();
+    // end test node-libcurl =================================================
+
+    // test google-trends-api =================================================
+    googleTrends.interestOverTime({keyword: 'Women\'s march'})
+    .then(function(results){
+      resultObj.googleTrends = results;
+      session.endDialog(JSON.stringify(resultObj));
+    })
+    .catch(function(err){
+      session.endDialog(JSON.stringify(resultObj));
+    });
+    // end test google-trends-api =================================================
 
     // var sidesEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Sides');
     // if (sidesEntity){
