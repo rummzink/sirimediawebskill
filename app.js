@@ -353,7 +353,7 @@ bot.dialog('Search', function (session,args) {
     
     curl.on( 'end', function( statusCode, body, headers ) {
         resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
-        trendData = body.substr(6);
+        trendData = body.substr(5);
         resultObj.trendData = JSON.parse(trendData);
         session.endDialog(JSON.stringify(resultObj));
         this.close();
