@@ -346,7 +346,7 @@ bot.dialog('Search', function (session,args) {
     // ============== test node-libcurl =================================================
     var curl = new Curl();
     curl.setOpt( 'URL', 
-        'https://trends.google.com/trends/api/widgetdata/relatedsearches?hl=en-US&tz=-420&req=%7B%22restriction%22:%7B%22geo%22:%7B%22country%22:%22TH%22%7D,%22time%22:%222017-08-07+2017-11-07%22%7D,%22keywordType%22:%22ENTITY%22,%22metric%22:%5B%22TOP%22,%22RISING%22%5D,%22trendinessSettings%22:%7B%22compareTime%22:%222017-05-06+2017-08-06%22%7D,%22requestOptions%22:%7B%22property%22:%22%22,%22backend%22:%22IZG%22,%22category%22:18%7D,%22language%22:%22en%22%7D&token=APP6_UEAAAAAWgKbF_vUBlE96j8-IregVR8UrBPuigr4' 
+        'https://trends.google.com/trends/api/explore?hl=en-US&tz=-420&req=%7B%22comparisonItem%22:%5B%7B%22geo%22:%22TH%22,%22time%22:%22now+7-d%22%7D%5D,%22category%22:18,%22property%22:%22%22%7D&tz=-420' 
     );
     curl.setOpt( 'FOLLOWLOCATION', true );
     curl.setOpt( 'SSL_VERIFYPEER', false );
