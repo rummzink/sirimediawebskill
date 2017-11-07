@@ -344,7 +344,7 @@ bot.dialog('Search', function (session,args) {
     };
 
     // ============== test node-libcurl =================================================
-    // curl.setOpt( 'URL', 'www.google.com' );
+    curl.setOpt( 'URL', 'www.google.com' );
     // curl.setOpt( 'FOLLOWLOCATION', true );
      
     // curl.on( 'end', function( statusCode, body, headers ) {
@@ -355,7 +355,7 @@ bot.dialog('Search', function (session,args) {
      
     // curl.on( 'error', curl.close.bind( curl ) );
     // curl.perform();
-    resultObj.testCurl = '-----setOpt-------';    
+    resultObj.testCurl = '-----the setOpt-------';    
     session.endDialog(JSON.stringify(resultObj)); 
     
     // ============== end test node-libcurl =================================================
