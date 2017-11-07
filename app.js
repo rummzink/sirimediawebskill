@@ -355,7 +355,8 @@ bot.dialog('Search', function (session,args) {
      
     curl.on( 'error', curl.close.bind( curl ) );
     curl.perform();
-    // resultObj.testCurl = '-------------------';     
+    resultObj.testCurl = '-------------------';    
+    session.endDialog(JSON.stringify(resultObj)); 
     
     // ============== end test node-libcurl =================================================
 
