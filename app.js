@@ -355,7 +355,7 @@ bot.dialog('Search', function (session,args) {
         resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
         trendData = JSON.parse(body.substr(6));
 
-        // resultObj.trendData = JSON.parse(trendData);
+        resultObj.trendData = trendData;
         session.endDialog(JSON.stringify(resultObj));
         this.close();
     });
