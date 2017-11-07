@@ -6,6 +6,7 @@ var restify = require('restify');
 var Store = require('./store');
 var spellService = require('./spell-service');
 var ssml = require('./ssml');
+var Curl = require( 'node-libcurl' ).Curl;
 const googleTrends = require('google-trends-api');
 
 // Setup Restify Server
@@ -342,17 +343,28 @@ bot.dialog('Search', function (session,args) {
         ]
     };
 
-    // test google-trends-api
-    googleTrends.interestOverTime({keyword: 'Women\'s march'})
-    .then(function(results){
-      console.log('These results are awesome', results);
-      resultObj.googleTrends = results;
-      session.endDialog(JSON.stringify(resultObj));
-    })
-    .catch(function(err){
-      console.error('Oh no there was an error', err);
-      session.endDialog(JSON.stringify(resultObj));
+    curl.setOpt( 'URL', 'www.google.com' );
+    curl.setOpt( 'FOLLOWLOCATION', true );
+     
+    curl.on( 'end', function( statusCode, body, headers ) {
+        resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
+        this.close();
     });
+     
+    curl.on( 'error', curl.close.bind( curl ) );
+    curl.perform();
+
+    // test google-trends-api
+    // googleTrends.interestOverTime({keyword: 'Women\'s march'})
+    // .then(function(results){
+    //   console.log('These results are awesome', results);
+    //   resultObj.googleTrends = results;
+    //   session.endDialog(JSON.stringify(resultObj));
+    // })
+    // .catch(function(err){
+    //   console.error('Oh no there was an error', err);
+    //   session.endDialog(JSON.stringify(resultObj));
+    // });
 
     // var sidesEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'Sides');
     // if (sidesEntity){

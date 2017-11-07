@@ -26,6 +26,7 @@
     "restify": "^4.3.0",
     "request": "^2.79.0",
     "bluebird": "^3.4.7",
-    "google-trends-api": "^4.3.0"
+    "google-trends-api": "^4.3.0",
+    "node-libcurl": "^1.2.0"
   }
 }
