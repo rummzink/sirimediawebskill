@@ -334,7 +334,6 @@ bot.dialog('Search', function (session,args) {
 
     var maleEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'male');
     var femaleEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'female');
-    var specifyGender = maleEntity || femaleEntity;
 
     var targetURL = null;
 
@@ -419,8 +418,17 @@ bot.dialog('Search', function (session,args) {
         }
     }
     if (!targetURL){
-        targetURL = 'products';
+        if (maleEntity){
+            targetURL = 'products/men';
+        }
+        else if(femaleEntity){
+            targetURL = 'products/women';
+        }
+        else{
+            targetURL = 'products';
+        }
     }
+    targetURL = '/content/we-retail/us/en/' + targetURL + '.html';
 
     // if belong to equipment, go to the target directly
     // for (i=0;i<entities.length && !targetURL;i++){
