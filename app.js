@@ -410,10 +410,10 @@ bot.dialog('Search', function (session,args) {
             }
             else{
                 if (femaleEntity && weRetailCategories[entities[i]].female){
-                    targetURL = 'female/'+entities[i];
+                    targetURL = 'women/'+entities[i];
                 }
                 else{
-                    targetURL = 'male/'+entities[i];
+                    targetURL = 'men/'+entities[i];
                 }
             }
         }
