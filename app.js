@@ -405,24 +405,24 @@ bot.dialog('Search', function (session,args) {
     for (i=0;i<entities.length && !targetURL;i++){
         if( weRetailCategories[entities[i]] ){
             if (weRetailCategories[entities[i]].category){
-                targetURL = weRetailCategories[entities[i]].category+'/'+entities[i];
+                targetURL = 'products/'+weRetailCategories[entities[i]].category+'/'+entities[i];
             }
             else{
                 if (femaleEntity && weRetailCategories[entities[i]].female){
-                    targetURL = 'women/'+entities[i];
+                    targetURL = 'products/women/'+entities[i];
                 }
                 else{
-                    targetURL = 'men/'+entities[i];
+                    targetURL = 'products/men/'+entities[i];
                 }
             }
         }
     }
     if (!targetURL){
         if (maleEntity){
-            targetURL = 'products/men';
+            targetURL = 'men';
         }
         else if(femaleEntity){
-            targetURL = 'products/women';
+            targetURL = 'women';
         }
         else{
             targetURL = 'products';
