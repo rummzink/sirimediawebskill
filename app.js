@@ -404,7 +404,7 @@ bot.dialog('Search', function (session,args) {
     };
 
     for (i=0;i<entities.length && !targetURL;i++){
-        if(weRetailCategories.includes(entities[i])){
+        if( weRetailCategories[entities[i]] ){
             if (weRetailCategories[entities[i]].category){
                 targetURL = weRetailCategories[entities[i]].category+'/'+entities[i];
             }
