@@ -334,9 +334,32 @@ bot.dialog('Search', function (session,args) {
 
     var maleEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'male');
     var femaleEntity = builder.EntityRecognizer.findEntity(args.intent.entities, 'female');
-    
+    var specifyGender = maleEntity || femaleEntity;
+
+    var targetURL = null;
+
+    var weRetailCategories = {
+        eq:[
+            'biking','hiking','running','surfing','water-sports','winter-sports'
+        ]
+        ,me:[
+            'coats','footwear','gloves','pants','scarfs','shirts','shorts'
+        ]
+        ,wo:[
+            'coats','gloves','pants','shirts','shorts'
+        ]
+    };
+
+    // if belong to equipment, go to the target directly
+    for (i=0;i<entities.length && !targetURL;i++){
+        if (weRetailCategories.eq.includes(entities[i])){
+            targetURL = 'eq';
+        }
+    }
+        
     var resultObj = {
         interest : entities,
+        targetURL: targetURL,
         entities : entities,
         maleEntity : maleEntity,
         femaleEntity : femaleEntity,
