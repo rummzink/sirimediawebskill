@@ -418,6 +418,9 @@ bot.dialog('Search', function (session,args) {
             }
         }
     }
+    if (!targetURL){
+        targetURL = 'products';
+    }
 
     // if belong to equipment, go to the target directly
     // for (i=0;i<entities.length && !targetURL;i++){
