@@ -338,7 +338,7 @@ bot.dialog('Search', function (session,args) {
 
     var targetURL = null;
 
-    var weRetailCategories = {
+    var weRetailCategories_deleteThis = {
         eq:[
             'biking','hiking','running','surfing','water-sports','winter-sports'
         ]
@@ -350,12 +350,83 @@ bot.dialog('Search', function (session,args) {
         ]
     };
 
-    // if belong to equipment, go to the target directly
+    var weRetailCategories = {
+        surfing:{
+            category : 'equipment',
+            isGenderSpecific : false,
+        },
+        'water-sports':{
+            category : 'equipment',
+            isGenderSpecific : false,
+        },
+        coats:{
+            category : null,
+            isGenderSpecific : true,
+            male:true,
+            female:true,
+        },
+        footwear:{
+            category : null,
+            isGenderSpecific : true,
+            male:true,
+            female:false,
+        },
+        gloves:{
+            category : null,
+            isGenderSpecific : true,
+            male:true,
+            female:true,
+        },
+        pants:{
+            category : null,
+            isGenderSpecific : true,
+            male:true,
+            female:true,
+        },
+        scarfs:{
+            category : null,
+            isGenderSpecific : true,
+            male:true,
+            female:false,
+        },
+        shirts:{
+            category : null,
+            isGenderSpecific : true,
+            male:true,
+            female:true,
+        },
+        shorts:{
+            category : null,
+            isGenderSpecific : true,
+            male:true,
+            female:true,
+        },
+    };
+
     for (i=0;i<entities.length && !targetURL;i++){
-        if (weRetailCategories.eq.includes(entities[i])){
-            targetURL = 'eq';
+        if(weRetailCategories.includes(entities[i])){
+            if (weRetailCategories[entities[i]].category){
+                targetURL = weRetailCategories[entities[i]].category+'/'+entities[i];
+            }
+            else{
+                if (femaleEntity && weRetailCategories[entities[i]].female){
+                    targetURL = 'female/'+entities[i];
+                }
+                else{
+                    targetURL = 'male/'+entities[i];
+                }
+            }
         }
     }
+
+    // if belong to equipment, go to the target directly
+    // for (i=0;i<entities.length && !targetURL;i++){
+    //     if (weRetailCategories.eq.includes(entities[i])){
+    //         targetURL = 'equipment/'+entities[i];
+    //     }
+    // }
+
+    // if not belonging to the equipment
         
     var resultObj = {
         interest : entities,
