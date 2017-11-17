@@ -62,8 +62,8 @@ function twitterAPI(
     ,consumer_secret
     ,oauth_token
     ,token_secret
-    ,callback
 ){
+    // not used anymore
     this.targets = {
         'getTrendsPlace':{
             method:'GET',
@@ -74,6 +74,7 @@ function twitterAPI(
             url:'https://api.twitter.com/1.1/statuses/update.json',
         }
     };
+
     this.enableConsoleLog = false;
 
     this.oauth_params = {
@@ -139,7 +140,7 @@ function twitterAPI(
         return theTimestamp;
     };
 
-    this.generateSignature = function(theTarget,params){
+    this.generateSignature = function(url,method,params){
         this.log("Generating Signature...");
         var mergedParams = {};
         Object.assign(mergedParams,params);
@@ -158,7 +159,7 @@ function twitterAPI(
         paramString = paramStringArray.join('&');
         this.log("paramString = ", paramString);
 
-        var signatureBaseString = theTarget.method.toUpperCase() + '&' + this.specialEncodeURIComponent(theTarget.url) + '&' + this.specialEncodeURIComponent(paramString);
+        var signatureBaseString = method.toUpperCase() + '&' + this.specialEncodeURIComponent(url) + '&' + this.specialEncodeURIComponent(paramString);
         this.log("signatureBaseString = ", signatureBaseString);
 
         var signingKey = this.specialEncodeURIComponent(consumer_secret) + '&' + this.specialEncodeURIComponent(token_secret);
@@ -203,29 +204,47 @@ function twitterAPI(
         return headerString;
     };
 
-    this.callback = function(result){
-        if (typeof callback == "undefined") {
-            this.log("Success. Result = ", result )
-        }
-        else {
-            callback(result);
-        }
+    this.defaultCallback = function(result){
+        this.log("Success. Result = ", result )
     };
 
-    this.fire = function(target,params){
+    this.isUrl = function(text){
+        var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+        return regexp.test(text);
+    };
+
+    this.fire = function(url,method,params,callback){
         this.log("Begin Fire()!")
         var _this = this;
-        if (! target in this.targets){
-            console.error("Invalid target. Possible targets are: ", Object.keys(this.targets).join(", ") );
+        var methods = ['GET','POST'];
+        if (
+            typeof url != 'string'
+            ||
+            ! this.isUrl(url)
+        ){
+            console.error("Invalid url.");
+            return false;
+        }
+        if (
+            typeof method != 'string'
+            ||
+            ! methods.includes(method.toUpperCase()) 
+        ){
+            console.error("Invalid method. Possible methods are: ", methods.join(", ") );
             return false;
         }
         if (typeof params != 'object'){
             console.error("Invalid params. The params parameter must be an object!" );
             return false;
         }
+        if (typeof callback != "function" ){
+            callback = _this.defaultCallback;
+        }
+
+        method = method.toUpperCase();
         this.oauth_params.oauth_nonce = this.generateNonce();
         this.oauth_params.oauth_timestamp = this.getTimestamp();
-        this.oauth_params.oauth_signature = this.generateSignature(this.targets[target],params);
+        this.oauth_params.oauth_signature = this.generateSignature(url,method,params);
         var headerString = this.generateHeaderString();
         
 
@@ -254,9 +273,7 @@ function twitterAPI(
         
         // end sample with jQuery ajax
         */
-
-        _this.callback("Looks good though!");
-
+        callback("Looks good though!");
         
         this.log("End Fire()!")
     };

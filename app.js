@@ -166,15 +166,19 @@ bot.dialog('Search', function (session,args) {
         ,"su3vBrcMXrpFX1uYCgARANOXPDBTe2CmyN5S04h5TQg6TArnAy"
         ,"77930247-2valpma0KuYMWkCqKuSnxbs1APi7VCkLX9sF8Fftp"
         ,"7sJC0gQGaZWhluJJ8azwJL0vcPkBioQUtCYlMSTs73hT3"
-        , function(result){
-            resultObj.twitterAPIResult = result;
-        }    
     );
-    theTwitterAPI.fire("getTrendsPlace",{
-        id:1,
-    });
+    theTwitterAPI.fire(
+        "https://api.twitter.com/1.1/trends/place.json",
+        "GET",
+        {
+            id:1,
+        },
+        function(){
+            session.endDialog(JSON.stringify(resultObj));
+        }
+    );
 
-    session.endDialog(JSON.stringify(resultObj));
+    
 
     // ============== test node-libcurl =================================================
     // var curl = new Curl();
