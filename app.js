@@ -170,6 +170,9 @@ bot.dialog('Search', function (session,args) {
             resultObj.twitterAPIResult = result;
         }    
     );
+    theTwitterAPI.fire("getTrendsPlace",{
+        id:1,
+    });
 
     session.endDialog(JSON.stringify(resultObj));
 
