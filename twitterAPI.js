@@ -229,7 +229,7 @@ function twitterAPI(
         var headerString = this.generateHeaderString();
         
 
-        
+
         /* 
         // sample with jQuery ajax 
         
@@ -255,7 +255,7 @@ function twitterAPI(
         // end sample with jQuery ajax
         */
 
-        
+        _this.callback("Looks good though!");
 
         
         this.log("End Fire()!")
