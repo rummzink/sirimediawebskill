@@ -173,11 +173,12 @@ bot.dialog('Search', function (session,args) {
         {
             id:1,
         },
-        function(){
-            session.endDialog(JSON.stringify(resultObj));
+        function(result){
+            resultObj.twitterAPIResult = result;
         }
     );
 
+    session.endDialog(JSON.stringify(resultObj));
     
 
     // ============== test node-libcurl =================================================
