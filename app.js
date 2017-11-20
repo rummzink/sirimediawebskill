@@ -181,33 +181,7 @@ bot.dialog('Search', function (session,args) {
     session.endDialog(JSON.stringify(resultObj));
     
 
-    // ============== test node-libcurl =================================================
-    // var curl = new Curl();
-    // curl.setOpt( 'URL', 
-    //     'https://trends.google.com/trends/api/widgetdata/relatedsearches?hl=en-US&tz=-420&req=%7B%22restriction%22:%7B%22geo%22:%7B%22country%22:%22TH%22%7D,%22time%22:%222017-10-07+2017-11-07%22%7D,%22keywordType%22:%22ENTITY%22,%22metric%22:%5B%22TOP%22,%22RISING%22%5D,%22trendinessSettings%22:%7B%22compareTime%22:%222017-09-05+2017-10-06%22%7D,%22requestOptions%22:%7B%22property%22:%22%22,%22backend%22:%22IZG%22,%22category%22:18%7D,%22language%22:%22en%22%7D&token=APP6_UEAAAAAWgLTub2MMho5DhfuQXUolcJiv9Egg6J2' 
-    // );
-    // curl.setOpt( 'FOLLOWLOCATION', true );
-    // curl.setOpt( 'SSL_VERIFYPEER', false );
-    
-    // curl.on( 'end', function( statusCode, body, headers ) {
-    //     resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
-    //     trendData = JSON.parse(body.substr(6));
 
-    //     resultObj.trendData = trendData;
-    //     session.endDialog(JSON.stringify(resultObj));
-    //     this.close();
-    // });
-     
-    // curl.on( 'error', function(err, curlErrCode){
-    //     console.error( 'Err: ', err );
-    //     console.error( 'Code: ', curlErrCode );
-    //     resultObj.testCurl = err + '---' + curlErrCode;     
-    //     session.endDialog(JSON.stringify(resultObj));
-    //     this.close();
-    // } );
-    // curl.perform();
-    
-    // ============== end test node-libcurl =================================================
 
 
     // ============== test google-trends-api =================================================
@@ -250,3 +224,32 @@ bot.dialog('Search', function (session,args) {
 function camelCaseToNormal(inputString){
     return inputString.replace(/([A-Z])/g, ' $1');
 }
+
+
+    // ============== test node-libcurl =================================================
+    // var curl = new Curl();
+    // curl.setOpt( 'URL', 
+    //     'https://trends.google.com/trends/api/widgetdata/relatedsearches?hl=en-US&tz=-420&req=%7B%22restriction%22:%7B%22geo%22:%7B%22country%22:%22TH%22%7D,%22time%22:%222017-10-07+2017-11-07%22%7D,%22keywordType%22:%22ENTITY%22,%22metric%22:%5B%22TOP%22,%22RISING%22%5D,%22trendinessSettings%22:%7B%22compareTime%22:%222017-09-05+2017-10-06%22%7D,%22requestOptions%22:%7B%22property%22:%22%22,%22backend%22:%22IZG%22,%22category%22:18%7D,%22language%22:%22en%22%7D&token=APP6_UEAAAAAWgLTub2MMho5DhfuQXUolcJiv9Egg6J2' 
+    // );
+    // curl.setOpt( 'FOLLOWLOCATION', true );
+    // curl.setOpt( 'SSL_VERIFYPEER', false );
+    
+    // curl.on( 'end', function( statusCode, body, headers ) {
+    //     resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
+    //     trendData = JSON.parse(body.substr(6));
+
+    //     resultObj.trendData = trendData;
+    //     session.endDialog(JSON.stringify(resultObj));
+    //     this.close();
+    // });
+     
+    // curl.on( 'error', function(err, curlErrCode){
+    //     console.error( 'Err: ', err );
+    //     console.error( 'Code: ', curlErrCode );
+    //     resultObj.testCurl = err + '---' + curlErrCode;     
+    //     session.endDialog(JSON.stringify(resultObj));
+    //     this.close();
+    // } );
+    // curl.perform();
+    
+    // ============== end test node-libcurl =================================================
