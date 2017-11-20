@@ -56,6 +56,7 @@ for: sirimedia co., ltd.
 
 /*/////////////////////////////////////////
 var jsSHA = require('jsSHA');
+var Curl = require( 'node-libcurl' ).Curl;
 
 function twitterAPI(
     oauth_consumer_key

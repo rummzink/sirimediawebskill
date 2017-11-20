@@ -6,7 +6,7 @@ var restify = require('restify');
 var Store = require('./store');
 var spellService = require('./spell-service');
 var ssml = require('./ssml');
-var Curl = require( 'node-libcurl' ).Curl;
+// var Curl = require( 'node-libcurl' ).Curl;
 var twitterAPI = require('./twitterAPI');
 const googleTrends = require('google-trends-api');
 
