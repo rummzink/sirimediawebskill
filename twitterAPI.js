@@ -57,6 +57,7 @@ for: sirimedia co., ltd.
 /*/////////////////////////////////////////
 var jsSHA = require('jsSHA');
 var Curl = require( 'node-libcurl' ).Curl;
+var querystring = require( 'querystring' );
 
 function twitterAPI(
     oauth_consumer_key
@@ -249,32 +250,40 @@ function twitterAPI(
         var headerString = this.generateHeaderString();
         
         // build curl
-        var curl = new Curl();
-        curl.setOpt( 'URL', 
-            'https://trends.google.com/trends/api/widgetdata/relatedsearches?hl=en-US&tz=-420&req=%7B%22restriction%22:%7B%22geo%22:%7B%22country%22:%22TH%22%7D,%22time%22:%222017-10-07+2017-11-07%22%7D,%22keywordType%22:%22ENTITY%22,%22metric%22:%5B%22TOP%22,%22RISING%22%5D,%22trendinessSettings%22:%7B%22compareTime%22:%222017-09-05+2017-10-06%22%7D,%22requestOptions%22:%7B%22property%22:%22%22,%22backend%22:%22IZG%22,%22category%22:18%7D,%22language%22:%22en%22%7D&token=APP6_UEAAAAAWgLTub2MMho5DhfuQXUolcJiv9Egg6J2' 
-        );
-        // curl.setOpt( 'FOLLOWLOCATION', true );
-        // curl.setOpt( 'SSL_VERIFYPEER', false );
+    
+        var curl = new Curl(),
+            data = params;
         
-        // curl.on( 'end', function( statusCode, body, headers ) {
-        //     resultObj.testCurl = statusCode + '---' + body.length + '---' + this.getInfo( 'TOTAL_TIME' );     
-        //     trendData = JSON.parse(body.substr(6));
+        //You need to build the query string,
+        // node has this helper function, but it's limited for real use cases (no support for array values for example)
+        data = querystring.stringify( data );
+        
+        curl.setOpt( Curl.option.URL, url );
+        curl.setOpt( Curl.option.POSTFIELDS, data );
+        curl.setOpt( Curl.option.HTTPHEADER, [
+            'Authorization: '+headerString
+            ,'Content-Type: application/x-www-form-urlencoded'
+        ] );
+        curl.setOpt( Curl.option.VERBOSE, true );
+        
+        // console.log( querystring.stringify( data ) );
+        
+        curl.perform();
+        
+        curl.on( 'end', function( statusCode, body ) {
+        
+            _this.callback(body);
+        
+            this.close();
+        });
+        
+        curl.on( 'error', curl.close.bind( curl ) ); //_this.error(a,b);
+        curl.on( 'error', function ( err, curlErrCode ) {
+            _this.error(curlErrCode,err);
+            this.close();
+        });
 
-        //     resultObj.trendData = trendData;
-        //     session.endDialog(JSON.stringify(resultObj));
-        //     this.close();
-        // });
         
-        // curl.on( 'error', function(err, curlErrCode){
-        //     console.error( 'Err: ', err );
-        //     console.error( 'Code: ', curlErrCode );
-        //     resultObj.testCurl = err + '---' + curlErrCode;     
-        //     session.endDialog(JSON.stringify(resultObj));
-        //     this.close();
-        // } );
-        // curl.perform();
-        
-
         /* 
         // sample with jQuery ajax 
         
