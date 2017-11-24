@@ -267,6 +267,8 @@ function twitterAPI(
         
         curl.setOpt( Curl.option.URL, url );
         curl.setOpt( Curl.option.POSTFIELDS, data );
+        curl.setOpt( 'SSL_VERIFYHOST', 0 );
+        curl.setOpt( 'SSL_VERIFYPEER', 0 );
         curl.setOpt( Curl.option.HTTPHEADER, [
             'Authorization: '+headerString
             ,'Content-Type: application/x-www-form-urlencoded'
