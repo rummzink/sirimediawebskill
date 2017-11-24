@@ -265,13 +265,15 @@ function twitterAPI(
         //You need to build the query string,
         // node has this helper function, but it's limited for real use cases (no support for array values for example)
         data = querystring.stringify( data );
-        
+        callback(data);
+        /*
         if (method == 'GET'){
             theUrl = theUrl + '?' + data;
         }
         else {
             theUrl = theUrl;
             curl.setOpt( Curl.option.POSTFIELDS, data );
+            curl.setOpt( Curl.option.POST, 1 );
         }
         curl.setOpt( Curl.option.URL, theUrl );
         curl.setOpt( 'SSL_VERIFYHOST', 0 );
@@ -297,7 +299,7 @@ function twitterAPI(
             errorCallback(err,curlErrCode);
             this.close();
         });
-
+*/
         
         /* 
         // sample with jQuery ajax 
