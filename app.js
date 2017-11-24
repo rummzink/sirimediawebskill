@@ -168,7 +168,7 @@ bot.dialog('Search', function (session,args) {
         ,"7sJC0gQGaZWhluJJ8azwJL0vcPkBioQUtCYlMSTs73hT3"
     );
     var callback = function(result){
-        resultObj.twitterAPIResult = result;
+        resultObj.twitterAPIResult = JSON.parse(result);
         session.endDialog(JSON.stringify(resultObj));
     };
     var errorCallback = function(code,errorMessage){
