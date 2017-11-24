@@ -275,17 +275,17 @@ function twitterAPI(
         
         // console.log( querystring.stringify( data ) );
         
-        //curl.perform();
+        curl.perform();
         
         curl.on( 'end', function( statusCode, body ) {
         
-            _this.callback(body);
+            callback(body);
         
             this.close();
         });
         
         curl.on( 'error', function ( err, curlErrCode ) {
-            _this.errorCallback(err,curlErrCode);
+            errorCallback(err,curlErrCode);
             this.close();
         });
 
@@ -314,7 +314,7 @@ function twitterAPI(
         
         // end sample with jQuery ajax
         */
-        callback("Looks good though!");
+        //callback("Looks good though!");
         
         this.log("End Fire()!")
     };
