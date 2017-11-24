@@ -167,18 +167,24 @@ bot.dialog('Search', function (session,args) {
         ,"77930247-2valpma0KuYMWkCqKuSnxbs1APi7VCkLX9sF8Fftp"
         ,"7sJC0gQGaZWhluJJ8azwJL0vcPkBioQUtCYlMSTs73hT3"
     );
+    var callback = function(result){
+        resultObj.twitterAPIResult = result;
+        session.endDialog(JSON.stringify(resultObj));
+    };
+    var errorCallback = function(code,errorMessage){
+        resultObj.twitterAPIResult = code+' '+errorMessage;
+        session.endDialog(JSON.stringify(resultObj));
+    };
     theTwitterAPI.fire(
         "https://api.twitter.com/1.1/trends/place.json",
         "GET",
         {
             id:1,
         },
-        function(result){
-            resultObj.twitterAPIResult = result;
-        }
+        callback,
+        errorCallback
     );
 
-    session.endDialog(JSON.stringify(resultObj));
     
 
 

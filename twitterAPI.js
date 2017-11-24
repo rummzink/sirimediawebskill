@@ -210,12 +210,16 @@ function twitterAPI(
         this.log("Success. Result = ", result )
     };
 
+    this.defaultErrorCallback = function(code,errorMessage){
+        this.error("Error! Code = ", code, "Error message: ",  errorMessage);
+    };
+
     this.isUrl = function(text){
         var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
         return regexp.test(text);
     };
 
-    this.fire = function(url,method,params,callback){
+    this.fire = function(url,method,params,callback,errorCallback){
         this.log("Begin Fire()!")
         var _this = this;
         var methods = ['GET','POST'];
@@ -241,6 +245,9 @@ function twitterAPI(
         }
         if (typeof callback != "function" ){
             callback = _this.defaultCallback;
+        }
+        if (typeof errorCallback != "function" ){
+            errorCallback = _this.defaultErrorCallback;
         }
 
         method = method.toUpperCase();
@@ -277,9 +284,8 @@ function twitterAPI(
             this.close();
         });
         
-        curl.on( 'error', curl.close.bind( curl ) ); //_this.error(a,b);
         curl.on( 'error', function ( err, curlErrCode ) {
-            _this.error(curlErrCode,err);
+            _this.errorCallback(err,curlErrCode);
             this.close();
         });
 
