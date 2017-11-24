@@ -275,7 +275,7 @@ function twitterAPI(
         
         // console.log( querystring.stringify( data ) );
         
-        curl.perform();
+        //curl.perform();
         
         curl.on( 'end', function( statusCode, body ) {
         
