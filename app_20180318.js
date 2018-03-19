@@ -9,17 +9,6 @@ var ssml = require('./ssml');
 // var Curl = require( 'node-libcurl' ).Curl;
 var twitterAPI = require('./twitterAPI');
 const googleTrends = require('google-trends-api');
-var azure = require('botbuilder-azure');
-
-var documentDbOptions = {
-    host: 'https://smbot.documents.azure.com:443/', 
-    masterKey: 'flwNN3FKciw3QUOtWyQ1k543xWNYkGVPnrkiPZNFeT6PjWRKCDQskP3BaGk7SwsYt1UMApk4tLMtLfFHJLKdVA==', 
-    database: 'botdocdb',   
-    collection: 'botdata'
-};
-
-var docDbClient = new azure.DocumentDbClient(documentDbOptions);
-var tableStorage = new azure.AzureBotStorage({ gzipData: false }, docDbClient);
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -35,7 +24,7 @@ server.post('/api/messages', connector.listen());
 
 var bot = new builder.UniversalBot(connector, function (session) {
     session.send('Sorry, I did not understand \'%s\'. Type \'help\' if you need assistance.', session.message.text);
-}).set('storage', tableStorage);
+});
 
 // You can provide your own model by specifing the 'LUIS_MODEL_URL' environment variable
 // This Url can be obtained by uploading or creating your model from the LUIS portal: https://www.luis.ai/
