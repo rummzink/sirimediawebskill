@@ -9,7 +9,7 @@ var ssml = require('./ssml');
 // var Curl = require( 'node-libcurl' ).Curl;
 var twitterAPI = require('./twitterAPI');
 const googleTrends = require('google-trends-api');
-// var azure = require('botbuilder-azure');
+var azure = require('botbuilder-azure');
 
 // var documentDbOptions = {
 //     host: 'https://smbot.documents.azure.com:443/', 
