@@ -16,7 +16,7 @@ var documentDbOptions = {
     masterKey: 'flwNN3FKciw3QUOtWyQ1k543xWNYkGVPnrkiPZNFeT6PjWRKCDQskP3BaGk7SwsYt1UMApk4tLMtLfFHJLKdVA==', 
     database: 'botdocdb',   
     collection: 'botdata'
-};
+}; 
 
 var docDbClient = new azure.DocumentDbClient(documentDbOptions);
 var tableStorage = new azure.AzureBotStorage({ gzipData: false }, docDbClient);
