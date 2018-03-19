@@ -14,7 +14,7 @@ var azure = require('botbuilder-azure');
 var documentDbOptions = {
     host: 'https://smbot.documents.azure.com:443/', 
     masterKey: 'flwNN3FKciw3QUOtWyQ1k543xWNYkGVPnrkiPZNFeT6PjWRKCDQskP3BaGk7SwsYt1UMApk4tLMtLfFHJLKdVA==', 
-    database: 'botdocdb',   
+    database: 'botdocdb',    
     collection: 'botdata'
 }; 
 
